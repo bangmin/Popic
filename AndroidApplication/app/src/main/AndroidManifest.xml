@@ -4,10 +4,23 @@
 
     <application
         android:allowBackup="true"
+        android:fullBackupContent="@xml/backup_descriptor"
         android:icon="@mipmap/ic_launcher"
-        android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
-        android:supportsRtl="true"
-        android:theme="@style/Theme.Popic" />
+        android:theme="@style/Theme.MaterialComponents.Light.NoActionBar">
+        <activity android:name=".ui.Educlass.Educlass"></activity>
+        <activity android:name=".ui.createEduclass.CreateEduclassActivity" />
+        <activity android:name=".ui.changeUserInformation.ChangeUserInformationActivity" />
+        <activity android:name=".ui.login.LoginActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".ui.main.MainActivity"
+            android:theme="@style/Theme.MaterialComponents.Light" />
+        <activity android:name=".ui.register.RegisterActivity" />
+    </application>
 
 </manifest>
