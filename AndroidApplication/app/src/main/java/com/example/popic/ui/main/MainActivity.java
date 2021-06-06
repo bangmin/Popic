@@ -17,10 +17,11 @@ import android.widget.Toast;
 import com.example.popic.R;
 import com.example.popic.ui.changeUserInformation.ChangeUserInformationActivity;
 import com.example.popic.ui.createEduclass.CreateEduclassActivity;
+import com.example.popic.ui.joinEduclass.JoinEduclassActivity;
 import com.example.popic.ui.main.listview.ListViewAdapter;
 
 public class MainActivity extends AppCompatActivity {
-    Button createEduclass;
+    Button createEduclass, joinEduclass;
     ListView listView;
     ListViewAdapter listViewAdapter;
 
@@ -32,6 +33,11 @@ public class MainActivity extends AppCompatActivity {
         createEduclass = findViewById(R.id.main_button_createEduclass);
         createEduclass.setOnClickListener(v -> {
             startActivity(new Intent(this, CreateEduclassActivity.class));
+        });
+
+        joinEduclass = findViewById(R.id.main_button_joinEduclass);
+        joinEduclass.setOnClickListener(v -> {
+            startActivity(new Intent(this, JoinEduclassActivity.class));
         });
 
 
@@ -68,9 +74,6 @@ public class MainActivity extends AppCompatActivity {
                 toast.setText("로그아웃 했습니다.");
                 toast.show();
                 finish();
-                break;
-            case R.id.menu_user_changeUserInformation:
-                startActivity(new Intent(this, ChangeUserInformationActivity.class));
                 break;
             case R.id.menu_user_deleteAccount:
                 toast.setText("회원탈퇴했습니다.");

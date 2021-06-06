@@ -6,11 +6,21 @@
         android:allowBackup="true"
         android:fullBackupContent="@xml/backup_descriptor"
         android:icon="@mipmap/ic_launcher"
-        android:theme="@style/Theme.MaterialComponents.Light.NoActionBar">
-        <activity android:name=".ui.Educlass.Educlass"></activity>
+        android:theme="@style/Theme.MaterialComponents.Light">
+        <activity android:name=".ui.modifyPoem.ModifyPoemActivity"></activity>
+        <activity android:name=".ui.picture.PictureActivity" />
+        <activity android:name=".ui.uploadPicture.UploadPictureActivity" />
+        <activity android:name=".ui.poem.PoemActivity" />
+        <activity
+            android:name=".ui.joinEduclass.JoinEduclassActivity"
+            android:theme="@style/Theme.MaterialComponents.Light" />
+        <activity android:name=".ui.createEduclass.ShowCodeActivity" />
+        <activity android:name=".ui.educlass.Educlass" />
         <activity android:name=".ui.createEduclass.CreateEduclassActivity" />
         <activity android:name=".ui.changeUserInformation.ChangeUserInformationActivity" />
-        <activity android:name=".ui.login.LoginActivity">
+        <activity
+            android:name=".ui.login.LoginActivity"
+            android:theme="@style/Theme.MaterialComponents.Light.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
