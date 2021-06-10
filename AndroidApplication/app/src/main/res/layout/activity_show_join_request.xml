@@ -4,11 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="@dimen/fab_margin"
-    tools:context=".ui.educlass.EduclassActivity">
+    tools:context=".ui.showJoinRequest.ShowJoinRequestActivity">
+
 
     <ListView
-        android:id="@+id/educlass_listview_poem"
+        android:id="@+id/showJoinRequest_listview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_constraintStart_toStartOf="parent"

@@ -1,16 +1,22 @@
 package com.example.popic.ui.picture.gridview;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
+import android.widget.PopupMenu;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.popic.R;
 import com.example.popic.ui.main.listview.ListViewItem;
+import com.example.popic.ui.modifyPicture.ModifyPictureActivity;
+import com.example.popic.ui.picture.PictureActivity;
 
 import java.util.ArrayList;
 
@@ -54,6 +60,33 @@ public class GridViewAdapter extends BaseAdapter {
         // 아이템 내 각 위젯에 데이터 반영
         pictureImageView.setImageDrawable(gridViewItem.getPictureDrawable());
         nameTextView.setText(gridViewItem.getNameString());
+
+        // https://www.programmersought.com/article/93024276727/
+        convertView.setOnClickListener(v -> {
+            //Define PopupMenu object
+            PopupMenu popupMenu = new PopupMenu(context, v);
+            //Set the layout of PopupMenu object
+            popupMenu.getMenuInflater().inflate(R.menu.menu_picture, popupMenu.getMenu());
+            //Set the PopupMenu click event
+            popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                @Override
+                public boolean onMenuItemClick(MenuItem item) {
+                    switch (item.getItemId()) {
+                        case R.id.menu_picture_modifyPicture:
+                            context.startActivity(new Intent(context, ModifyPictureActivity.class));
+                            break;
+                        case R.id.menu_picture_deletePicture:
+                            Toast toast = Toast.makeText(context.getApplicationContext(),"삭제했습니다.", Toast.LENGTH_LONG);
+                            toast.show();
+                            break;
+                    }
+                    return true;
+                }
+            });
+
+            //Show menu
+            popupMenu.show();
+        });
 
         return convertView;
     }

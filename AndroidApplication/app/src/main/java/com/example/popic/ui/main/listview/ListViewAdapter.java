@@ -11,7 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.popic.R;
-import com.example.popic.ui.educlass.Educlass;
+import com.example.popic.ui.educlass.EduclassActivity;
 
 import java.util.ArrayList;
 
@@ -56,7 +56,7 @@ public class ListViewAdapter extends BaseAdapter {
         descTextView.setText(listViewItem.getDesc());
 
         convertView.setOnClickListener(v -> {
-            Intent intent = new Intent(context, Educlass.class);
+            Intent intent = new Intent(context, EduclassActivity.class);
             intent.putExtra("position", pos);
             context.startActivity(intent);
         });

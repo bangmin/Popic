@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/menu_educlass_leaveEduclass"
+        android:title="에듀클래스 탈퇴" />
+    <item
+        android:id="@+id/menu_educlass_uploadPoem"
+        android:title="시 업로드" />
+    <item
+        android:id="@+id/menu_educlass_showJoinRequest"
+        android:title="가입 신청 목록 보기" />
+</menu>
