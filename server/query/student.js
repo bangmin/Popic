@@ -4,7 +4,7 @@ const status = require('./status');
 module.exports = {
     create: (id, pw) => {
         connection.query(`
-            INSERT INTO TEACHER (TEACHER_ID, TEACHER_PW)
+            INSERT INTO STUDENT (STUDENT_ID, STUDENT_PW)
             VALUES ("${id}", "${pw}")
             `,
             
@@ -18,8 +18,8 @@ module.exports = {
     read: (id) => {
         connection.query(`
             SELECT *
-            FROM TEACHER
-            WHERE TEACHER_ID = "${id}"
+            FROM STUDENT
+            WHERE STUDENT_ID = "${id}"
             `,
             
             (err, result) => {
@@ -32,9 +32,9 @@ module.exports = {
 
     update: (id, pw) => {
         connection.query(`
-            UPDATE TEACHER
-            SET TEACHER_PW = "${pw}"
-            WHERE TEACHER_ID = "${id}"
+            UPDATE STUDENT
+            SET STUDENT_PW = "${pw}"
+            WHERE STUDENT_ID = "${id}"
             `,
     
             (err, result) => {
@@ -46,9 +46,8 @@ module.exports = {
 
     delete: (id) => {
         connection.query(`
-            DELETE
-            FROM TEACHER
-            WHERE TEACHER_ID = "${id}"
+            DELETE FROM STUDENT
+            WHERE STUDENT_ID = "${id}"
             `,
     
             (err, result) => {
