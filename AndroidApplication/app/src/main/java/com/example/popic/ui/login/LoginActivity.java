@@ -2,6 +2,8 @@ package com.example.popic.ui.login;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.Button;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -11,7 +13,8 @@ import com.example.popic.ui.register.RegisterActivity;
 import com.google.android.material.button.MaterialButton;
 
 public class LoginActivity extends AppCompatActivity {
-    MaterialButton login, register;
+    Button login;
+    TextView register;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
