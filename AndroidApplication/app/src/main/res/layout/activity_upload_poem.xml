@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#FFFFFF"
     tools:context=".ui.uploadPoem.UploadPoemActivity">
 
     <com.google.android.material.textfield.TextInputLayout
@@ -11,7 +12,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:hint="시 제목"
+        android:hint="제목"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -20,6 +21,7 @@
             android:id="@+id/uploadPoem_editText_poemName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="#FFFFFF"
             android:inputType="text"
             android:selectAllOnFocus="true" />
     </com.google.android.material.textfield.TextInputLayout>
@@ -29,7 +31,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:hint="시 내용"
+        android:hint="내용"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/uploadPoem_textInputLayout_poemName">
@@ -38,6 +40,7 @@
             android:id="@+id/uploadPoem_editText_poemContent"
             android:layout_width="match_parent"
             android:layout_height="300dp"
+            android:background="#FFFFFF"
             android:inputType="text"
             android:selectAllOnFocus="true" />
     </com.google.android.material.textfield.TextInputLayout>
@@ -56,6 +59,7 @@
             android:id="@+id/uploadPoem_editText_poemDescription"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="#FFFFFF"
             android:inputType="text"
             android:selectAllOnFocus="true" />
     </com.google.android.material.textfield.TextInputLayout>

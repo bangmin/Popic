@@ -9,6 +9,8 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -18,9 +20,13 @@ import com.example.popic.R;
 import com.example.popic.ui.createEduclass.CreateEduclassActivity;
 import com.example.popic.ui.joinEduclass.JoinEduclassActivity;
 import com.example.popic.ui.main.listview.ListViewAdapter;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class MainActivity extends AppCompatActivity {
-    Button createEduclass, joinEduclass;
+    private Animation fab_open, fab_close;
+    private Boolean isFabOpen = false;
+    private FloatingActionButton fab, createEduclass, joinEduclass;
+    private TextView text1, text2;
     ListView listView;
     ListViewAdapter listViewAdapter;
 
@@ -29,13 +35,30 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        fab_open = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.fab_open);
+        fab_close = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.fab_close);
+
+        fab = (FloatingActionButton) findViewById(R.id.fab);
         createEduclass = findViewById(R.id.main_button_createEduclass);
+        joinEduclass = findViewById(R.id.main_button_joinEduclass);
+
+        text1 = (TextView) findViewById(R.id.text1);
+        text2 = (TextView) findViewById(R.id.text2);
+
+        fab.setOnClickListener(v -> {
+            anim();
+            Toast.makeText(this, "Button", Toast.LENGTH_SHORT).show();
+        });
         createEduclass.setOnClickListener(v -> {
+            anim();
+            Toast.makeText(this, "Button1", Toast.LENGTH_SHORT).show();
             startActivity(new Intent(this, CreateEduclassActivity.class));
         });
 
-        joinEduclass = findViewById(R.id.main_button_joinEduclass);
+
         joinEduclass.setOnClickListener(v -> {
+            anim();
+            Toast.makeText(this, "Button2", Toast.LENGTH_SHORT).show();
             startActivity(new Intent(this, JoinEduclassActivity.class));
         });
 
@@ -55,7 +78,26 @@ public class MainActivity extends AppCompatActivity {
         listViewAdapter.addItem(ContextCompat.getDrawable(this, R.drawable.seoul), "테스트 1", "테스트테스트테스트테스트테스트");
         listViewAdapter.addItem(ContextCompat.getDrawable(this, R.drawable.ic_launcher_background), "테스트 2", "트테스트테스트테스트");
     }
+    public void anim() {
 
+        if (isFabOpen) {
+            createEduclass.startAnimation(fab_close);
+            joinEduclass.startAnimation(fab_close);
+            text1.startAnimation(fab_close);
+            text2.startAnimation(fab_close);
+            createEduclass.setClickable(false);
+            joinEduclass.setClickable(false);
+            isFabOpen = false;
+        } else {
+            createEduclass.startAnimation(fab_open);
+            joinEduclass.startAnimation(fab_open);
+            text1.startAnimation(fab_open);
+            text2.startAnimation(fab_open);
+            createEduclass.setClickable(true);
+            joinEduclass.setClickable(true);
+            isFabOpen = true;
+        }
+    }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();

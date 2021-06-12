@@ -19,7 +19,7 @@
         android:columnWidth="150dp"
         android:gravity="center"
         android:id="@+id/picture_gridview_picture"
-        android:numColumns="2"
+        android:numColumns="1"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
