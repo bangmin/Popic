@@ -26,5 +26,8 @@ public class PictureActivity extends AppCompatActivity {
 
         gridViewAdapter.addItem(ContextCompat.getDrawable(this, R.drawable.seoul), "김철수");
         gridViewAdapter.addItem(ContextCompat.getDrawable(this, R.drawable.ic_launcher_background), "이영희");
+        gridViewAdapter.addItem(ContextCompat.getDrawable(this, R.drawable.ic_launcher_background), "이영희");
+        gridViewAdapter.addItem(ContextCompat.getDrawable(this, R.drawable.ic_launcher_background), "이영희");
+        gridViewAdapter.addItem(ContextCompat.getDrawable(this, R.drawable.ic_launcher_background), "이영희");
     }
 }

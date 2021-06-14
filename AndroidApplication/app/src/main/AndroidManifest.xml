@@ -6,7 +6,9 @@
         android:allowBackup="true"
         android:fullBackupContent="@xml/backup_descriptor"
         android:icon="@mipmap/ic_launcher"
-        android:theme="@style/Theme.MaterialComponents.Light">
+        android:theme="@style/Theme.MaterialComponents.Light"
+        android:configChanges="orientation|keyboardHidden|screenSize"
+        android:windowSoftInputMode="stateHidden|adjustPan">
         <activity android:name=".ui.modifyPicture.ModifyPictureActivity"></activity>
         <activity android:name=".ui.showJoinRequest.ShowJoinRequestActivity" />
         <activity android:name=".ui.uploadPoem.UploadPoemActivity" />
@@ -17,7 +19,8 @@
         <activity android:name=".ui.poem.PoemActivity" />
         <activity
             android:name=".ui.joinEduclass.JoinEduclassActivity"
-            android:theme="@style/Theme.MaterialComponents.Light" />
+            android:theme="@style/Theme.MaterialComponents.Light"
+            android:windowSoftInputMode="adjustPan" />
         <activity android:name=".ui.createEduclass.ShowCodeActivity" />
         <activity android:name=".ui.educlass.EduclassActivity" />
         <activity android:name=".ui.createEduclass.CreateEduclassActivity" />
