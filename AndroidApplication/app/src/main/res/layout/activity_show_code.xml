@@ -11,8 +11,9 @@
         android:id="@+id/showCode_textview_finished"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:text="에듀클래스 생성이 완료되었습니다!"
+        android:layout_marginTop="150dp"
+        android:text="생성 완료"
+        android:fontFamily="@font/info_font"
         android:textSize="50sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -47,10 +48,14 @@
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/showCode_button_finish"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_width="318dp"
+        android:layout_height="66dp"
         android:layout_marginTop="32dp"
-        android:text="완료"
+        android:textColor="#FFFFFF"
+        android:textSize="16dp"
+        app:backgroundTint="#30475e"
+        app:cornerRadius="50dp"
+        android:text="확인"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/showCode_constraintlayout_code" />
