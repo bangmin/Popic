@@ -5,14 +5,18 @@
     android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_constraintTop_toTopOf="parent"
+    app:layout_constraintStart_toStartOf="parent">
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="195dp"
         android:layout_height="179dp"
         app:srcCompat="@drawable/feather_right"
-        tools:ignore="MissingConstraints" />
-
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="150dp" />
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
@@ -21,7 +25,10 @@
         android:text="POPIC"
         android:textColor="#000000"
         android:textSize="50dp"
-        tools:ignore="MissingConstraints" />
+        android:layout_alignLeft="@id/imageView"
+        android:layout_alignTop="@id/imageView"
+        android:layout_marginLeft="140dp"
+        android:layout_marginTop="30dp"/>
     <TextView
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
@@ -30,26 +37,25 @@
         android:text="시를 그리다"
         android:textColor="#616161"
         android:textSize="15dp"
-        tools:ignore="MissingConstraints" />
-
+        tools:ignore="MissingConstraints"
+        android:layout_below="@id/textView"
+        android:layout_alignLeft="@id/imageView"
+        android:layout_marginLeft="140dp"/>
     <EditText
         android:id="@+id/username"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
-        android:layout_marginTop="376dp"
+        android:layout_marginTop="50dp"
         android:layout_marginEnd="24dp"
         android:hint="email"
         android:inputType="textEmailAddress"
         android:selectAllOnFocus="true"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_below="@id/imageView"/>
 
     <EditText
         android:id="@+id/password"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:layout_marginTop="24dp"
@@ -58,9 +64,7 @@
         android:imeOptions="actionDone"
         android:inputType="textPassword"
         android:selectAllOnFocus="true"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/username" />
+        android:layout_below="@id/username"/>
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/login_button_login"
@@ -80,8 +84,28 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/password"
-        app:layout_constraintVertical_bias="0.268" />
+        app:layout_constraintVertical_bias="0.268"
+        android:layout_below="@id/password"/>
+    <ProgressBar
+        android:id="@+id/loading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="64dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="64dp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.3"
+        android:layout_toEndOf="@id/password"
+        android:layout_toStartOf="@id/password"
+        android:layout_toLeftOf="@id/password"
+        android:layout_toRightOf="@id/password" />
+</RelativeLayout>
+
+
 
     <TextView
         android:id="@+id/textView4"
@@ -110,21 +134,7 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintHorizontal_chainStyle="packed" />
 
-    <ProgressBar
-        android:id="@+id/loading"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="64dp"
-        android:layout_marginEnd="32dp"
-        android:layout_marginBottom="64dp"
-        android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/password"
-        app:layout_constraintStart_toStartOf="@+id/password"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.3" />
+
 
 
 

@@ -8,4 +8,8 @@
         android:fontStyle = "normal"
         android:fontWeight = "400"
         android:font = "@font/title_font"/>
+    <font
+        android:fontStyle = "normal"
+        android:fontWeight = "400"
+        android:font = "@font/info_font"/>
 </font-family>
