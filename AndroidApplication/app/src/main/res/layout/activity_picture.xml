@@ -16,12 +16,13 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <GridView
-        android:columnWidth="150dp"
-        android:gravity="center"
         android:id="@+id/picture_gridview_picture"
-        android:numColumns="1"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:layout_marginTop="16dp"
+        android:columnWidth="150dp"
+        android:gravity="center"
+        android:numColumns="1"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@id/picture_button_seeMine" />
 
