@@ -7,7 +7,6 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -21,7 +20,7 @@ import com.example.popic.ui.uploadPoem.UploadPoemActivity;
 public class EduclassActivity extends AppCompatActivity {
     ListViewAdapter listViewAdapter;
     ListView listView;
-
+    int pos_edu;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,9 +36,17 @@ public class EduclassActivity extends AppCompatActivity {
         listView.addHeaderView(textView);
 
         listView.setAdapter(listViewAdapter);
+        Intent intent = getIntent();
+        pos_edu = intent.getExtras().getInt("position");
+        if(pos_edu == 0){
+            listViewAdapter.addItem("님의 손길", "한용운", pos_edu);
+            listViewAdapter.addItem("가는 길", "김소월", pos_edu);
+        }else if(pos_edu == 1){
 
-        listViewAdapter.addItem("시 1", "테스트테스트테스트테스트테스트");
-        listViewAdapter.addItem("시 2", "트테스트테스트테스트");
+            listViewAdapter.addItem("가을날 ", "노천명", pos_edu);
+            listViewAdapter.addItem("꽃", "이육사", pos_edu);
+        }
+
     }
 
 
@@ -57,7 +64,9 @@ public class EduclassActivity extends AppCompatActivity {
                 startActivity(new Intent(this, LeaveEduclassActivity.class));
                 break;
             case R.id.menu_educlass_uploadPoem:
-                startActivity(new Intent(this, UploadPoemActivity.class));
+                Intent intent2 = new Intent(this, UploadPoemActivity.class);
+                intent2.putExtra("position", pos_edu);
+                startActivity(intent2);
                 break;
             case R.id.menu_educlass_showJoinRequest:
                 startActivity(new Intent(this, ShowJoinRequestActivity.class));

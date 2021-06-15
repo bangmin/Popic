@@ -50,10 +50,13 @@ public class ListViewAdapter extends BaseAdapter {
         // 아이템 내 각 위젯에 데이터 반영
         titleTextView.setText(listViewItem.getTitle());
         descTextView.setText(listViewItem.getDesc());
-
+        String title = listViewItem.getTitle();
+        int pos_edu = listViewItem.getPos_edu();
         convertView.setOnClickListener(v -> {
             Intent intent = new Intent(context, PoemActivity.class);
-            intent.putExtra("position", pos);
+            intent.putExtra("position_poem", pos); //n번째 시
+            intent.putExtra("position_edu", pos_edu); //n번째 에듀클래스
+            intent.putExtra("title", title);
             context.startActivity(intent);
         });
 
@@ -73,11 +76,12 @@ public class ListViewAdapter extends BaseAdapter {
     }
 
     // 아이템 데이터 추가를 위한 함수. 개발자가 원하는대로 작성 가능.
-    public void addItem(String title, String desc) {
+    public void addItem(String title, String desc, int pos) {
         ListViewItem item = new ListViewItem();
 
         item.setTitle(title);
         item.setDesc(desc);
+        item.setPos_edu(pos);
 
         listViewItemList.add(item);
     }

@@ -74,9 +74,9 @@ public class MainActivity extends AppCompatActivity {
         listView.addHeaderView(textView);
 
         listView.setAdapter(listViewAdapter);
-        
-        listViewAdapter.addItem(ContextCompat.getDrawable(this, R.drawable.seoul), "테스트 1", "테스트테스트테스트테스트테스트");
-        listViewAdapter.addItem(ContextCompat.getDrawable(this, R.drawable.ic_launcher_background), "테스트 2", "트테스트테스트테스트");
+
+        listViewAdapter.addItem(ContextCompat.getDrawable(this, R.drawable.seoul), "시를 사랑하는 모임", "시를 좋아하는 일반인들의 모임");
+        listViewAdapter.addItem(ContextCompat.getDrawable(this, R.drawable.ic_launcher_background), "2-4반 국어 클래스", "2-4반 시 수업");
     }
     public void anim() {
 
