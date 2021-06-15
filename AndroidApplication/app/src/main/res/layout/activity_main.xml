@@ -19,27 +19,30 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
+        android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
         android:background="#FFFFFF"
         android:text="create class"
         android:textColor="#000000"
         android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="@id/main_button_createEduclass"
-        app:layout_constraintTop_toTopOf="@id/main_button_createEduclass"
-        app:layout_constraintEnd_toStartOf="@id/main_button_createEduclass"></TextView>
+        app:layout_constraintEnd_toStartOf="@id/main_button_createEduclass"
+        app:layout_constraintTop_toTopOf="@id/main_button_createEduclass" />
+
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/main_button_createEduclass"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="15dp"
         android:layout_marginRight="15sp"
+        android:layout_marginBottom="15dp"
         android:src="@drawable/create"
         android:visibility="invisible"
         app:backgroundTint="#ffffff"
         app:elevation="6dp"
-        app:pressedTranslationZ="12dp"
+        app:layout_constraintBottom_toTopOf="@id/main_button_joinEduclass"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/main_button_joinEduclass"/>
+        app:pressedTranslationZ="12dp" />
+
     <TextView
         android:id="@+id/text1"
         android:layout_width="wrap_content"
@@ -50,22 +53,23 @@
         android:textColor="#000000"
         android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="@id/main_button_joinEduclass"
-        app:layout_constraintTop_toTopOf="@id/main_button_joinEduclass"
-        app:layout_constraintEnd_toStartOf="@id/main_button_joinEduclass"></TextView>
+        app:layout_constraintEnd_toStartOf="@id/main_button_joinEduclass"
+        app:layout_constraintTop_toTopOf="@id/main_button_joinEduclass"></TextView>
+
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/main_button_joinEduclass"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
-        android:layout_marginBottom="15dp"
         android:layout_marginRight="15sp"
+        android:layout_marginBottom="15dp"
         android:src="@drawable/magnifying_glass"
         android:visibility="invisible"
         app:backgroundTint="#ffffff"
         app:elevation="6dp"
-        app:pressedTranslationZ="12dp"
+        app:layout_constraintBottom_toTopOf="@id/fab"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/fab"/>
+        app:pressedTranslationZ="12dp" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab"
@@ -75,7 +79,7 @@
         android:layout_margin="15sp"
         android:backgroundTint="#9500ff"
         android:src="@drawable/plus"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
