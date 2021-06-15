@@ -29,17 +29,19 @@
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/modifyPoem_textInputLayout_poemContent"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
         android:hint="시 내용"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/modifyPoem_textInputLayout_poemDescription"
         app:layout_constraintTop_toBottomOf="@id/modifyPoem_textInputLayout_poemName">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/modifyPoem_editText_poemContent"
             android:layout_width="match_parent"
-            android:layout_height="300dp"
+            android:layout_height="match_parent"
             android:inputType="text"
             android:selectAllOnFocus="true" />
     </com.google.android.material.textfield.TextInputLayout>
@@ -48,11 +50,11 @@
         android:id="@+id/modifyPoem_textInputLayout_poemDescription"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginBottom="48dp"
         android:hint="시 설명"
+        app:layout_constraintBottom_toTopOf="@id/modifyPoem_button_finish"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/modifyPoem_textInputLayout_poemContent">
+        app:layout_constraintStart_toStartOf="parent">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/modifyPoem_editText_poemDescription"
@@ -66,19 +68,19 @@
         android:id="@+id/modifyPoem_button_finish"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
+        android:layout_marginBottom="16dp"
         android:text="완료"
+        app:layout_constraintBottom_toTopOf="@id/modifyPoem_button_deletePoem"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/modifyPoem_textInputLayout_poemDescription" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/modifyPoem_button_deletePoem"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
         android:text="시 삭제"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/modifyPoem_button_finish" />
+        app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
