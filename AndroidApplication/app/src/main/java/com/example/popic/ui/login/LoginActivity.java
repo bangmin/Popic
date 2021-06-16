@@ -48,11 +48,11 @@ public class LoginActivity extends AppCompatActivity {
         register = findViewById(R.id.login_button_register);
 
         login.setOnClickListener(v -> {
-            if (requestLogin(username.getText().toString(), password.getText().toString()) == 0) {
+            //if (requestLogin(username.getText().toString(), password.getText().toString()) == 0) {
                 Intent intent = new Intent(this, MainActivity.class);
                 intent.putExtra("id", username.getText().toString());
                 startActivity(intent);
-            }
+            //}
         });
 
         register.setOnClickListener(v -> {
@@ -71,7 +71,7 @@ public class LoginActivity extends AppCompatActivity {
 
             boolean success = jsonObject.getBoolean("success");
             if (success) {
-                if (((JSONObject) jsonObject.getJSONArray("result").get(0)).get("TEACHER_PW").equals(password.getText().toString())) {
+                if (((JSONObject) jsonObject.getJSONArray("result").get(0)).get("TEACHER_PW").equals(mPassword)) {
                     return 0; // 로그인 성공
                 }
                 else return -1;

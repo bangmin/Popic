@@ -84,5 +84,5 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/createEduclass_textinputlayout_educlassdescription" />
+        app:layout_constraintTop_toBottomOf="@id/createEduclass_textinputlayout_educlassDescription" />
 </androidx.constraintlayout.widget.ConstraintLayout>
