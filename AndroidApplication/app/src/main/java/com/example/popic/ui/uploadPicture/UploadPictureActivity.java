@@ -7,11 +7,15 @@ import android.graphics.Canvas;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+
 import com.example.popic.R;
+
 import androidx.appcompat.app.AppCompatActivity;
+
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.os.Bundle;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 //그림을 그리는 Canvas , Paint 객체를 사용하여 그려보자...
@@ -19,14 +23,26 @@ import android.widget.Toast;
 //그림판 앱....
 
 public class UploadPictureActivity extends AppCompatActivity {
-    Button finish;
+    Button pen, eraser, finish;
+    DrawView drawView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_upload_picture);
 
+        drawView = new DrawView(this);
+        ((LinearLayout)findViewById(R.id.uploadpicture_linearlayout_canvas)).addView(drawView);
+
+        pen = findViewById(R.id.uploadPicture_button_pen);
+        pen.setOnClickListener(v -> drawView.setType(0));
+
+        eraser = findViewById(R.id.uploadPicture_button_eraser);
+        eraser.setOnClickListener(v -> drawView.reset());
+
         finish = findViewById(R.id.uploadpicture_button_finish);
         finish.setOnClickListener(v -> finish());
+
 
         //디바이스 회전시 값 유지를 하기위한 코드
         Resources r = Resources.getSystem();
@@ -48,12 +64,12 @@ public class UploadPictureActivity extends AppCompatActivity {
 
         //현재 디바이스의 방향성을 체크...
 
-        switch(newConfig.orientation){
+        switch (newConfig.orientation) {
             case Configuration.ORIENTATION_LANDSCAPE:
-                Toast.makeText(getApplicationContext(),"가로",Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "가로", Toast.LENGTH_SHORT).show();
                 break;
             case Configuration.ORIENTATION_PORTRAIT:
-                Toast.makeText(getApplicationContext(),"세로",Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "세로", Toast.LENGTH_SHORT).show();
                 return;
         }
 
