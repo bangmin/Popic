@@ -114,8 +114,8 @@
                                   <option name="values">
                                     <map>
                                       <entry key="backgroundAssetType" value="COLOR" />
-                                      <entry key="backgroundColor" value="ffffff" />
-                                      <entry key="outputName" value="ic_icon" />
+                                      <entry key="backgroundColor" value="faede1" />
+                                      <entry key="outputName" value="icon_feather" />
                                     </map>
                                   </option>
                                 </PersistentState>

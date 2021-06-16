@@ -7,8 +7,8 @@
         android:allowBackup="true"
         android:configChanges="orientation|keyboardHidden|screenSize"
         android:fullBackupContent="@xml/backup_descriptor"
-        android:icon="@mipmap/ic_icon"
-        android:roundIcon="@mipmap/ic_icon_round"
+        android:icon="@mipmap/icon_feather"
+        android:roundIcon="@mipmap/icon_feather_round"
         android:theme="@style/Theme.MaterialComponents.Light"
         android:usesCleartextTraffic="true"
         android:windowSoftInputMode="stateHidden|adjustPan">
