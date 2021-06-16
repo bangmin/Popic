@@ -20,7 +20,7 @@
         app:layout_constraintTop_toBottomOf="@id/createEduclass_imageview_icon">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/createEduclass_edittext_educlassname"
+            android:id="@+id/createEduclass_edittext_educlassName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="text"
@@ -28,7 +28,7 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/createEduclass_textinputlayout_educlassdescription"
+        android:id="@+id/createEduclass_textinputlayout_educlassDescription"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
@@ -76,5 +76,5 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/createEduclass_textinputlayout_educlassdescription"/>
+        app:layout_constraintTop_toBottomOf="@id/createEduclass_textinputlayout_educlassDescription"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

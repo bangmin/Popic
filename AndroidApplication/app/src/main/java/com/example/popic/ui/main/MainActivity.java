@@ -17,10 +17,16 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.popic.R;
+import com.example.popic.ui.JsonTask;
 import com.example.popic.ui.createEduclass.CreateEduclassActivity;
 import com.example.popic.ui.joinEduclass.JoinEduclassActivity;
 import com.example.popic.ui.main.listview.ListViewAdapter;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.concurrent.ExecutionException;
 
 public class MainActivity extends AppCompatActivity {
     private Animation fab_open, fab_close;
@@ -75,11 +81,15 @@ public class MainActivity extends AppCompatActivity {
 
         listView.setAdapter(listViewAdapter);
 
-        listViewAdapter.addItem(ContextCompat.getDrawable(this, R.drawable.seoul), "시를 사랑하는 모임", "시를 좋아하는 일반인들의 모임");
-        listViewAdapter.addItem(ContextCompat.getDrawable(this, R.drawable.ic_launcher_background), "2-4반 국어 클래스", "2-4반 시 수업");
+        if (requestEduclassList(getIntent().getStringExtra("id")) == 0) {
+            listViewAdapter.addItem(ContextCompat.getDrawable(this, R.drawable.seoul), "시를 사랑하는 모임", "시를 좋아하는 일반인들의 모임");
+            listViewAdapter.addItem(ContextCompat.getDrawable(this, R.drawable.ic_launcher_background), "2-4반 국어 클래스", "2-4반 시 수업");
+        }
+        ;
     }
-    public void anim() {
 
+
+    public void anim() {
         if (isFabOpen) {
             createEduclass.startAnimation(fab_close);
             joinEduclass.startAnimation(fab_close);
@@ -98,6 +108,7 @@ public class MainActivity extends AppCompatActivity {
             isFabOpen = true;
         }
     }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
@@ -107,10 +118,9 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        Toast toast = Toast.makeText(getApplicationContext(),"", Toast.LENGTH_LONG);
+        Toast toast = Toast.makeText(getApplicationContext(), "", Toast.LENGTH_LONG);
 
-        switch(item.getItemId())
-        {
+        switch (item.getItemId()) {
             case R.id.menu_main_logout:
                 toast.setText("로그아웃 했습니다.");
                 toast.show();
@@ -123,5 +133,21 @@ public class MainActivity extends AppCompatActivity {
                 break;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private int requestEduclassList(String mId) {
+        JSONObject jsonObject = null;
+        try {
+            jsonObject = new JsonTask().execute("educlassList/" + mId).get();
+            if (jsonObject == null) return -404; // 서버 에러
+
+            boolean success = jsonObject.getBoolean("success");
+            if (success) {
+                return 0;
+            } else return -1;
+        } catch (ExecutionException | InterruptedException | JSONException e) {
+            e.printStackTrace();
+            return -1;
+        }
     }
 }
