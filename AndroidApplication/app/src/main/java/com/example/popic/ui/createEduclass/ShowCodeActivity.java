@@ -22,6 +22,8 @@ public class ShowCodeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show_code);
+
+        /*
         Random rnd = new Random();
         final String random_name_1 = String.valueOf((char) ((int) (rnd.nextInt(26))+97)); //영어 소문자 a-z
         final String random_name_2 = String.valueOf((char) ((int) (rnd.nextInt(26))+65)); //영어 대문자 A-Z
@@ -31,6 +33,10 @@ public class ShowCodeActivity extends AppCompatActivity {
         int randomNum4 = rnd.nextInt(max_num_value - min_num_value + 1) + min_num_value;
         code = findViewById(R.id.showCode_textview_code);
         code.setText(String.valueOf(random_name_1+random_name_2+randomNum1+randomNum2+randomNum3+randomNum4));
+         */
+
+        code = findViewById(R.id.showCode_textview_code);
+        code.setText(getIntent().getStringExtra("code"));
 
         finish = findViewById(R.id.showCode_button_finish);
         finish.setOnClickListener(v -> {
