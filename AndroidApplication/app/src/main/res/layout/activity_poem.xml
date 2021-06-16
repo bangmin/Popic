@@ -44,8 +44,12 @@
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/poem_button_uploadpicture"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_width="318dp"
+        android:layout_height="66dp"
+        android:textColor="#FFFFFF"
+        android:textSize="16dp"
+        app:backgroundTint="#30475e"
+        app:cornerRadius="50dp"
         android:layout_marginBottom="16dp"
         android:text="그림 업로드"
         app:layout_constraintBottom_toTopOf="@id/poem_button_seepicture"
@@ -54,8 +58,12 @@
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/poem_button_seepicture"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_width="318dp"
+        android:layout_height="66dp"
+        android:textColor="#FFFFFF"
+        android:textSize="16dp"
+        app:backgroundTint="#30475e"
+        app:cornerRadius="50dp"
         android:layout_marginTop="16dp"
         android:text="그림 보기"
         app:layout_constraintBottom_toBottomOf="parent"

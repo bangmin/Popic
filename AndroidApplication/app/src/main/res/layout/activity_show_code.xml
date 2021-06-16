@@ -7,16 +7,29 @@
     android:padding="@dimen/fab_margin"
     tools:context=".ui.createEduclass.ShowCodeActivity">
 
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/welcomimage"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginRight="25dp"
+        android:foregroundGravity="center_vertical"
+        android:src="@drawable/present"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"></androidx.appcompat.widget.AppCompatImageView>
+
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/showCode_textview_finished"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="150dp"
-        android:text="생성 완료"
+        android:layout_marginTop="25dp"
         android:fontFamily="@font/info_font"
+        android:gravity="center"
+        android:text="생성 완료!"
+        android:textColor="@color/black"
         android:textSize="50sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/welcomimage"
+        tools:layout_editor_absoluteX="16dp" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/showCode_constraintlayout_code"
