@@ -74,7 +74,11 @@
     <com.google.android.material.button.MaterialButton
         android:id="@+id/createEduclass_button_createEduclass"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="66dp"
+        android:textColor="#FFFFFF"
+        android:textSize="16dp"
+        app:backgroundTint="#30475e"
+        app:cornerRadius="50dp"
         android:layout_marginTop="16dp"
         android:text="에듀클래스 생성"
         app:layout_constraintBottom_toBottomOf="parent"
