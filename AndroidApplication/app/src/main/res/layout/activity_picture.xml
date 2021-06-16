@@ -11,6 +11,9 @@
         android:id="@+id/picture_button_seeMine"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textColor="#FFFFFF"
+        android:textSize="16dp"
+        app:backgroundTint="#30475e"
         android:text="내 그림 보기"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

@@ -2,15 +2,18 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.popic">
 
+    <uses-permission android:name="android.permission.INTERNET" />
     <application
         android:allowBackup="true"
+        android:configChanges="orientation|keyboardHidden|screenSize"
         android:fullBackupContent="@xml/backup_descriptor"
         android:icon="@mipmap/ic_icon"
         android:roundIcon="@mipmap/ic_icon_round"
         android:theme="@style/Theme.MaterialComponents.Light"
-        android:configChanges="orientation|keyboardHidden|screenSize"
+        android:usesCleartextTraffic="true"
         android:windowSoftInputMode="stateHidden|adjustPan">
-        <activity android:name=".ui.modifyPicture.ModifyPictureActivity"></activity>
+
+        <activity android:name=".ui.modifyPicture.ModifyPictureActivity" />
         <activity android:name=".ui.showJoinRequest.ShowJoinRequestActivity" />
         <activity android:name=".ui.uploadPoem.UploadPoemActivity" />
         <activity android:name=".ui.leaveEduclass.LeaveEduclassActivity" />
