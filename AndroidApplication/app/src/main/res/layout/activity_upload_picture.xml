@@ -14,18 +14,18 @@
         android:orientation="horizontal"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
-        <androidx.appcompat.widget.AppCompatImageView
+
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/uploadPicture_button_pen"
-            android:layout_width="100dp"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:src="@drawable/office_material">
-        </androidx.appcompat.widget.AppCompatImageView>
-        <androidx.appcompat.widget.AppCompatImageView
+            android:text="펜" />
+
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/uploadPicture_button_eraser"
-            android:layout_width="100dp"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:src="@drawable/eraser_tool">
-        </androidx.appcompat.widget.AppCompatImageView>
+            android:text="지우기" />
     </LinearLayout>
 
     <LinearLayout
