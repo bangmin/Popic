@@ -46,6 +46,8 @@ public class UploadPictureActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_upload_picture);
 
+        poemId = getIntent().getIntExtra("poem_id", 0);
+
         drawView = new DrawView(this);
         ((LinearLayout) findViewById(R.id.uploadpicture_linearlayout_canvas)).addView(drawView);
 
