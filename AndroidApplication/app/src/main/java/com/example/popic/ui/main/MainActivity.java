@@ -6,6 +6,8 @@ import androidx.core.content.ContextCompat;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -35,6 +37,8 @@ public class MainActivity extends AppCompatActivity {
     private TextView text1, text2;
     ListView listView;
     ListViewAdapter listViewAdapter;
+    String state, id;
+    private JSONObject jsonObject;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,8 +61,11 @@ public class MainActivity extends AppCompatActivity {
         });
         createEduclass.setOnClickListener(v -> {
             anim();
+            String id = getIntent().getExtras().getString("id");
             Toast.makeText(this, "Button1", Toast.LENGTH_SHORT).show();
-            startActivity(new Intent(this, CreateEduclassActivity.class));
+            Intent intent2 = new Intent(this, CreateEduclassActivity.class);
+            intent2.putExtra("id", id);
+            startActivity(intent2);
         });
 
 
@@ -81,11 +88,30 @@ public class MainActivity extends AppCompatActivity {
 
         listView.setAdapter(listViewAdapter);
 
-        if (requestEduclassList(getIntent().getStringExtra("id")) == 0) {
-            listViewAdapter.addItem(ContextCompat.getDrawable(this, R.drawable.seoul), "시를 사랑하는 모임", "시를 좋아하는 일반인들의 모임");
-            listViewAdapter.addItem(ContextCompat.getDrawable(this, R.drawable.ic_launcher_background), "2-4반 국어 클래스", "2-4반 시 수업");
-        }
-        ;
+        if (requestEduclassList(getIntent().getStringExtra("id")) == 0) {//??
+            String edu_name = null;
+            String edu_description = null;
+            int edu_id = -1;
+            int len = -1;
+            try {
+                len = jsonObject.getJSONArray("result").length() - 1;
+                Log.d("길이", String.valueOf(len));
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            while(len >= 0){
+                try {
+                    edu_name = (String) ((JSONObject) jsonObject.getJSONArray("result").get(len)).get("EDUCLASS_NAME");
+                    edu_description = (String) ((JSONObject) jsonObject.getJSONArray("result").get(len)).get("EDUCLASS_DESCRIPTION");
+                    edu_id = (int) ((JSONObject) jsonObject.getJSONArray("result").get(len)).get("EDUCLASS_ID");
+                    String edu_id2 = String.valueOf (((JSONObject) jsonObject.getJSONArray("result").get(len)).get("EDUCLASS_ID"));
+                    listViewAdapter.addItem(ContextCompat.getDrawable(this, R.drawable.seoul), edu_name, edu_description, edu_id2);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                len = len -1;
+            }
+        };
     }
 
 
@@ -127,24 +153,53 @@ public class MainActivity extends AppCompatActivity {
                 finish();
                 break;
             case R.id.menu_main_deleteAccount:
-                toast.setText("회원탈퇴했습니다.");
-                toast.show();
-                finish();
-                break;
+                Intent intent = getIntent();
+                id = intent.getExtras().getString("id");
+                state = intent.getExtras().getString("state"); //이거 위치가 중요. OnCreate에 두니 작동 x
+
+                if (requestSignout(id, state) == 0) {
+                    toast.setText("회원탈퇴했습니다.");
+                    toast.show();
+                    finish();
+                    break;
+                }
+
         }
         return super.onOptionsItemSelected(item);
     }
 
+
     private int requestEduclassList(String mId) {
-        JSONObject jsonObject = null;
+        jsonObject = null;
         try {
-            jsonObject = new JsonTask().execute("educlassList/" + mId).get();
+            Log.w("name22", mId );
+            jsonObject = new JsonTask().execute("educlass/read/" + mId).get();
+            jsonObject.getJSONArray("result").length();
+            Log.d("TAG", String.valueOf(jsonObject.getJSONArray("result").length()));
+            Log.d("TAG", "requestEduclassList() called with: mId = [" + ((JSONObject) jsonObject.getJSONArray("result").get(2)).get("EDUCLASS_NAME") + "]");
             if (jsonObject == null) return -404; // 서버 에러
 
             boolean success = jsonObject.getBoolean("success");
             if (success) {
                 return 0;
             } else return -1;
+        } catch (ExecutionException | InterruptedException | JSONException e) {
+            e.printStackTrace();
+            return -1;
+        }
+    }
+
+    private int requestSignout(String mUsername, String state) {
+        try {
+            JSONObject jsonObject = new JsonTask().execute(state + "/delete/" + mUsername).get();
+            if (jsonObject == null) return -4; // 서버 에러
+
+            boolean success = jsonObject.getBoolean("success");
+            if (success) {
+                return 0; // 탈퇴 성공
+            } else {
+                return -2; // 탈퇴 실패
+            }
         } catch (ExecutionException | InterruptedException | JSONException e) {
             e.printStackTrace();
             return -1;

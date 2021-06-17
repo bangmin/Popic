@@ -2,6 +2,7 @@ package com.example.popic.ui.educlass.listview;
 
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -51,12 +52,15 @@ public class ListViewAdapter extends BaseAdapter {
         titleTextView.setText(listViewItem.getTitle());
         descTextView.setText(listViewItem.getDesc());
         String title = listViewItem.getTitle();
-        int pos_edu = listViewItem.getPos_edu();
+        int pos_poem = listViewItem.getPos_edu();
+        String edu_id = listViewItem.getEdu_id();
+
         convertView.setOnClickListener(v -> {
             Intent intent = new Intent(context, PoemActivity.class);
-            intent.putExtra("position_poem", pos); //n번째 시
-            intent.putExtra("position_edu", pos_edu); //n번째 에듀클래스
+            intent.putExtra("pos_poem", pos_poem); //n번째 에듀클래스
             intent.putExtra("title", title);
+            intent.putExtra("edu_id", edu_id);
+            Log.d("ppp3", edu_id);
             context.startActivity(intent);
         });
 
@@ -76,12 +80,13 @@ public class ListViewAdapter extends BaseAdapter {
     }
 
     // 아이템 데이터 추가를 위한 함수. 개발자가 원하는대로 작성 가능.
-    public void addItem(String title, String desc, int pos) {
+    public void addItem(String title, String desc, int pos, String edu_id) {
         ListViewItem item = new ListViewItem();
 
         item.setTitle(title);
         item.setDesc(desc);
         item.setPos_edu(pos);
+        item.setEdu_id(edu_id);
 
         listViewItemList.add(item);
     }

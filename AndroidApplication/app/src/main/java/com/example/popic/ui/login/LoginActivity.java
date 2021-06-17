@@ -5,14 +5,17 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.IdRes;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.popic.R;
 import com.example.popic.ui.JsonTask;
 import com.example.popic.ui.main.MainActivity;
+import com.example.popic.ui.poem.PoemActivity;
 import com.example.popic.ui.register.RegisterActivity;
 import com.google.android.material.button.MaterialButton;
 
@@ -35,6 +38,8 @@ public class LoginActivity extends AppCompatActivity {
     EditText username, password;
     Button login;
     TextView register;
+    private RadioGroup radioGroup;
+    private String state;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,10 +52,14 @@ public class LoginActivity extends AppCompatActivity {
         login = findViewById(R.id.login_button_login);
         register = findViewById(R.id.login_button_register);
 
+        radioGroup = (RadioGroup) findViewById(R.id.radioGroup);
+        radioGroup.setOnCheckedChangeListener(radioGroupButtonChangeListener);
+
         login.setOnClickListener(v -> {
-            if (requestLogin(username.getText().toString(), password.getText().toString()) == 0) {
+            if (requestLogin(username.getText().toString(), password.getText().toString(), state) == 0) {
                 Intent intent = new Intent(this, MainActivity.class);
                 intent.putExtra("id", username.getText().toString());
+                intent.putExtra("state", state);
                 startActivity(intent);
             }
         });
@@ -58,15 +67,26 @@ public class LoginActivity extends AppCompatActivity {
         register.setOnClickListener(v -> {
             startActivity(new Intent(this, RegisterActivity.class));
         });
+
+
     }
 
-    private int requestLogin(String mUsername, String mPassword) {
+    RadioGroup.OnCheckedChangeListener radioGroupButtonChangeListener = new RadioGroup.OnCheckedChangeListener() {
+        @Override
+        public void onCheckedChanged(RadioGroup radioGroup, @IdRes int i) {
+            if(i == R.id.rg_btn1){
+                state = "teacher";
+            } else if(i == R.id.rg_btn2){
+                state = "student";
+            } } };
+
+    private int requestLogin(String mUsername, String mPassword, String state) {
         if (mUsername.equals("") || mPassword.equals("")) {
             return -3; // username 또는 Password 가 입력되지 않음.
         }
 
         try {
-            JSONObject jsonObject = new JsonTask().execute("test/" + mUsername).get();
+            JSONObject jsonObject = new JsonTask().execute(state + "/read/" + mUsername).get();
             if (jsonObject == null) return -4; // 서버 에러
 
             boolean success = jsonObject.getBoolean("success");

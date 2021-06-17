@@ -6,6 +6,7 @@ public class ListViewItem {
     private Drawable iconDrawable;
     private String titleStr;
     private String descStr;
+    private String edu_id;
 
     public void setIcon(Drawable icon) {
         iconDrawable = icon;
@@ -19,6 +20,8 @@ public class ListViewItem {
         descStr = desc;
     }
 
+    public void setEdu_id(String id) { this.edu_id = id; }
+
     public Drawable getIcon() {
         return this.iconDrawable;
     }
@@ -29,5 +32,9 @@ public class ListViewItem {
 
     public String getDesc() {
         return this.descStr;
+    }
+
+    public String getEdu_id() {
+        return this.edu_id;
     }
 }
