@@ -6,7 +6,6 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Path;
-import android.graphics.Rect;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
@@ -15,25 +14,33 @@ import androidx.annotation.Nullable;
 
 public class DrawView extends View {
     private int type; // 0 : 펜, 1 : 지우개
+    private Bitmap bitmap;
+    private Canvas canvas;
 
     public void setType(int type) {
         this.type = type;
     }
 
-    private Bitmap bitmap;
+    public Bitmap getBitmap() {
+        draw(canvas);
+        return bitmap;
+    }
 
     private Paint paint = new Paint();
-    private Paint paintEraser = new Paint();
 
     //여러가지의 그리기 명령을 모았다가 한번에 출력해주는
     //버퍼역할을 담당한다..
     private Path path = new Path();
-    private Path pathEraser = new Path();
 
     private int x, y;
 
     public DrawView(Context context) {
         super(context);
+        paint.setColor(Color.BLACK);
+        //STROKE속성을 이용하여 테두리...선...
+        //두께
+        paint.setStyle(Paint.Style.STROKE);
+        paint.setStrokeWidth(10);
     }
 
     public DrawView(Context context, @Nullable AttributeSet attrs) {
@@ -42,24 +49,16 @@ public class DrawView extends View {
 
     @Override
     protected void onDraw(Canvas canvas) {
-        switch (type) {
-            case 0: // 펜
-                paint.setColor(Color.BLACK);
-                //STROKE속성을 이용하여 테두리...선...
-                paint.setStyle(Paint.Style.STROKE);
-                //두께
-                paint.setStrokeWidth(3);
-                canvas.drawPath(path, paint);
-                break;
-            case 1: // 지우개
-                paintEraser.setColor(Color.TRANSPARENT);
-                //STROKE속성을 이용하여 테두리...선...
-                paintEraser.setStyle(Paint.Style.STROKE);
-                //두께
-                paintEraser.setStrokeWidth(3);
-                canvas.drawPath(pathEraser, paintEraser);
-                break;
-        }
+        canvas.drawPath(path, paint);
+        this.canvas.drawPath(path, paint);
+    }
+
+    @Override
+    protected void onSizeChanged(int w, int h, int oldw, int oldh) {
+        super.onSizeChanged(w, h, oldw, oldh);
+        bitmap = Bitmap.createBitmap(w, h, Bitmap.Config.ARGB_8888);
+        canvas = new Canvas(bitmap);
+        canvas.drawBitmap(bitmap, 0, 0, null);
     }
 
     @Override
@@ -78,33 +77,17 @@ public class DrawView extends View {
                 break;
         }
 
-        //View의 onDraw()를 호출하는 메소드...
         invalidate();
 
         return true;
     }
 
     private void startTouch(int x, int y) {
-        switch (type) {
-            case 0: // 펜
-                path.moveTo(x, y);
-                break;
-            case 1: // 지우개
-                pathEraser = new Path();
-                pathEraser.moveTo(x, y);
-                break;
-        }
+        path.moveTo(x, y);
     }
 
     private void moveTouch(int x, int y) {
-        switch (type) {
-            case 0: // 펜
-                path.lineTo(x, y);
-                break;
-            case 1: // 지우개
-                pathEraser.lineTo(x, y);
-                break;
-        }
+        path.lineTo(x, y);
     }
 
     public void reset() {
