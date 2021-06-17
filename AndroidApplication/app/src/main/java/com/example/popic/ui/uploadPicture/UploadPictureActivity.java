@@ -37,6 +37,8 @@ import java.util.concurrent.ExecutionException;
 
 public class UploadPictureActivity extends AppCompatActivity {
     Button pen, eraser, finish;
+    int poemId;
+    String studentId;
     DrawView drawView;
 
     @Override
@@ -56,7 +58,7 @@ public class UploadPictureActivity extends AppCompatActivity {
         finish = findViewById(R.id.uploadpicture_button_finish);
         finish.setOnClickListener(v -> {
             Bitmap bitmap = drawView.getBitmap();
-            if (requestUploadPicture(ImageUtil.convert(bitmap)) == 0) {
+            if (requestUploadPicture(poemId, studentId, ImageUtil.convert(bitmap)) == 0) {
                 finish();
             }
             // int maxLogSize = 1000;
@@ -89,13 +91,13 @@ public class UploadPictureActivity extends AppCompatActivity {
     }
 
 
-    private int requestUploadPicture(String base64) {
-        Log.d("test", "requestUploadPicture: base64 length : ");
+    private int requestUploadPicture(int mPoemId, String mStudentId, String base64) {
+        Log.d("test", "requestUploadPicture: base64 length : " + base64.length());
         JSONObject jsonObject = null;
         try {
-            jsonObject = new JsonTask().execute("picture/create/12141/studentTest", "image", "\"" + base64 + "\"").get();
+            jsonObject = new JsonTask().execute("picture/create/" + mPoemId + "/" + mStudentId, "image", base64).get();
             if (jsonObject != null) {
-                Log.d("test", "requestUploadPicture: jsonObject" + jsonObject.toString());
+                Log.d("test", "requestUploadPicture: jsonObject: " + jsonObject.toString());
             } else {
                 Log.d("test", "requestUploadPicture: jsonObject IS NULL");
             }
