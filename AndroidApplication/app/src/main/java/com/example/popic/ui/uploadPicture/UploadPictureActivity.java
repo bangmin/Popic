@@ -1,22 +1,35 @@
 package com.example.popic.ui.uploadPicture;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
+import android.graphics.Path;
 import android.os.Bundle;
+import android.util.AttributeSet;
+import android.util.DisplayMetrics;
+import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 
 import com.example.popic.R;
-
-import androidx.appcompat.app.AppCompatActivity;
+import com.example.popic.ui.ImageUtil;
+import com.example.popic.ui.JsonTask;
 
 import android.content.res.Configuration;
-import android.content.res.Resources;
-import android.os.Bundle;
 import android.widget.LinearLayout;
 import android.widget.Toast;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.concurrent.ExecutionException;
 
 //그림을 그리는 Canvas , Paint 객체를 사용하여 그려보자...
 
@@ -32,7 +45,7 @@ public class UploadPictureActivity extends AppCompatActivity {
         setContentView(R.layout.activity_upload_picture);
 
         drawView = new DrawView(this);
-        ((LinearLayout)findViewById(R.id.uploadpicture_linearlayout_canvas)).addView(drawView);
+        ((LinearLayout) findViewById(R.id.uploadpicture_linearlayout_canvas)).addView(drawView);
 
         pen = findViewById(R.id.uploadPicture_button_pen);
         pen.setOnClickListener(v -> drawView.setType(0));
@@ -41,21 +54,22 @@ public class UploadPictureActivity extends AppCompatActivity {
         eraser.setOnClickListener(v -> drawView.reset());
 
         finish = findViewById(R.id.uploadpicture_button_finish);
-        finish.setOnClickListener(v -> finish());
-
-
-        //디바이스 회전시 값 유지를 하기위한 코드
-        Resources r = Resources.getSystem();
-        Configuration config = r.getConfiguration();
-        onConfigurationChanged(config);
-
-        //onConfigurationChanged
-        //오버라이드를 했을경우 회전시마다 onCreate메소드를 호출하므로
-        // 재호출 하지 않도록 manifest에 속성두가지를 추가해주면된다..
-//        android:configChanges="orientation|keyboardHidden|screenSize"
-//        android:windowSoftInputMode="stateHidden|adjustPan"
-        //actitvy가 여러개라면 모든 액티비티에 속성을 추가해주는것이 좋다...
-
+        finish.setOnClickListener(v -> {
+            Bitmap bitmap = drawView.getBitmap();
+            if (requestUploadPicture(ImageUtil.convert(bitmap)) == 0) {
+                finish();
+            }
+            // int maxLogSize = 1000;
+            // String veryLongString = ImageUtil.convert(bitmap);
+            //
+            // for (int i = 0; i <= veryLongString.length() / maxLogSize; i++) {
+            //    int start = i * maxLogSize;
+            //    int end = (i + 1) * maxLogSize;
+            //    end = Math.min(end, veryLongString.length());
+            //    Log.d("test", veryLongString.substring(start, end));
+            // }
+            // Log.d("test", ImageUtil.convert(bitmap));
+        });
     }
 
     @Override
@@ -72,7 +86,30 @@ public class UploadPictureActivity extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), "세로", Toast.LENGTH_SHORT).show();
                 return;
         }
-
     }
 
+
+    private int requestUploadPicture(String base64) {
+        Log.d("test", "requestUploadPicture: base64 length : ");
+        JSONObject jsonObject = null;
+        try {
+            jsonObject = new JsonTask().execute("picture/create/12141/studentTest", "image", "\"" + base64 + "\"").get();
+            if (jsonObject != null) {
+                Log.d("test", "requestUploadPicture: jsonObject" + jsonObject.toString());
+            } else {
+                Log.d("test", "requestUploadPicture: jsonObject IS NULL");
+            }
+
+
+            if (jsonObject == null) return -404; // 서버 에러
+
+            boolean success = jsonObject.getBoolean("success");
+            if (success) {
+                return 0;
+            } else return -1;
+        } catch (ExecutionException | InterruptedException | JSONException e) {
+            e.printStackTrace();
+            return -1;
+        }
+    }
 }

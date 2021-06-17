@@ -32,6 +32,8 @@
         android:id="@+id/uploadpicture_linearlayout_canvas"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:minWidth="360dp"
+        android:minHeight="360dp"
         android:orientation="horizontal"
         app:layout_constraintBottom_toTopOf="@id/uploadpicture_button_finish"
         app:layout_constraintEnd_toEndOf="parent"
@@ -43,12 +45,12 @@
         android:id="@+id/uploadpicture_button_finish"
         android:layout_width="match_parent"
         android:layout_height="66dp"
+        android:layout_margin="@dimen/fab_margin"
+        android:text="완료"
         android:textColor="#FFFFFF"
         android:textSize="16dp"
         app:backgroundTint="#30475e"
         app:cornerRadius="50dp"
-        android:layout_margin="@dimen/fab_margin"
-        android:text="완료"
         app:layout_constraintBottom_toBottomOf="parent" />
 
 
