@@ -9,14 +9,22 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.popic.R;
+import com.example.popic.ui.JsonTask;
+import com.example.popic.ui.createEduclass.CreateEduclassActivity;
 import com.example.popic.ui.modifyPoem.ModifyPoemActivity;
 import com.example.popic.ui.picture.PictureActivity;
 import com.example.popic.ui.uploadPicture.UploadPictureActivity;
 import com.google.android.material.textview.MaterialTextView;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.concurrent.ExecutionException;
+
 public class PoemActivity extends AppCompatActivity {
     Button modifyPoem, uploadPicture, seePicture;
     MaterialTextView title, context;
+    private JSONObject jsonObject;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,13 +34,26 @@ public class PoemActivity extends AppCompatActivity {
         setContentView(R.layout.activity_poem);
 
         String gettitle = intent.getExtras().getString("title");
-        int get_edu_position = intent.getExtras().getInt("position_edu"); //n번째 에듀클래스
-        Log.d("TAG", String.valueOf(get_edu_position));
-        int get_poem_position = intent.getExtras().getInt("position_poem"); //n번째 시
-        Log.d("TAG", String.valueOf(get_poem_position));
+        int get_poem_position = intent.getExtras().getInt("pos_poem"); //n번째 시
+        String edu_id = intent.getExtras().getString("edu_id");
+
+        Log.d("poem_content", edu_id);
+
         title =  findViewById(R.id.poem_textview_name);
         context = findViewById(R.id.poem_textview_content);
+        if (requestPoemList(getIntent().getStringExtra("edu_id")) == 0) {
+            String poem_content = null;
+            try {
+                poem_content = (String) ((JSONObject) jsonObject.getJSONArray("result").get(get_poem_position)).get("POEM_CONTENT");
+                title.setText(gettitle);
+                context.setText(poem_content);
 
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+
+/*
         if(get_edu_position == 0){
             if(get_poem_position == 0){
                 title.setText(gettitle);
@@ -110,7 +131,7 @@ public class PoemActivity extends AppCompatActivity {
                         "나비처럼 취(醉)하는 회상(回想)의 무리들아\n" +
                         "오늘 내 여기서 너를 불러 보노라\n");
             }
-        }
+        }*/
 
         modifyPoem = findViewById(R.id.poem_button_modifypoem);
         modifyPoem.setOnClickListener(v -> {
@@ -119,7 +140,19 @@ public class PoemActivity extends AppCompatActivity {
 
         uploadPicture = findViewById(R.id.poem_button_uploadpicture);
         uploadPicture.setOnClickListener(v -> {
-            startActivity(new Intent(this, UploadPictureActivity.class));
+            if (requestPoemList(getIntent().getStringExtra("edu_id")) == 0) {
+                String POEM_ID = null;
+                try {
+                    POEM_ID = (String) ((JSONObject) jsonObject.getJSONArray("result").get(get_poem_position)).get("POEM_ID");
+                    Intent intent2 = new Intent(this, UploadPictureActivity.class);
+                    intent2.putExtra("poem_id", POEM_ID);
+                    startActivity(intent2);
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+
         });
 
         seePicture = findViewById(R.id.poem_button_seepicture);
@@ -127,4 +160,23 @@ public class PoemActivity extends AppCompatActivity {
             startActivity(new Intent(this, PictureActivity.class));
         });
     }
+
+    private int requestPoemList(String edu_id) {
+        jsonObject = null;
+        try {
+            jsonObject = new JsonTask().execute("poem/read/" + edu_id).get();
+            jsonObject.getJSONArray("result").length();
+            Log.d("TAG", String.valueOf(jsonObject.getJSONArray("result").length()));
+            if (jsonObject == null) return -404; // 서버 에러
+
+            boolean success = jsonObject.getBoolean("success");
+            if (success) {
+                return 0;
+            } else return -1;
+        } catch (ExecutionException | InterruptedException | JSONException e) {
+            e.printStackTrace();
+            return -1;
+        }
+    }
+
 }

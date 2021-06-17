@@ -4,7 +4,7 @@ public class ListViewItem {
     private String titleStr;
     private String descStr;
     private int pos_edu;
-
+    String edu_id;
     public void setTitle(String title) {
         titleStr = title;
     }
@@ -17,6 +17,9 @@ public class ListViewItem {
         pos_edu = pos;
     }
 
+    public void setEdu_id(String id) {
+        edu_id = id;
+    }
     public String getTitle() {
         return this.titleStr;
     }
@@ -27,5 +30,9 @@ public class ListViewItem {
 
     public int getPos_edu() {
         return this.pos_edu;
+    }
+
+    public String getEdu_id() {
+        return this.edu_id;
     }
 }

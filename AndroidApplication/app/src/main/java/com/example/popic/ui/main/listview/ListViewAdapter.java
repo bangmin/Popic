@@ -3,6 +3,7 @@ package com.example.popic.ui.main.listview;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -57,7 +58,8 @@ public class ListViewAdapter extends BaseAdapter {
 
         convertView.setOnClickListener(v -> {
             Intent intent = new Intent(context, EduclassActivity.class);
-            intent.putExtra("position", pos);
+            Log.d("TAG2", listViewItem.getEdu_id());
+            intent.putExtra("edu_id", listViewItem.getEdu_id());
             context.startActivity(intent);
         });
 
@@ -77,12 +79,13 @@ public class ListViewAdapter extends BaseAdapter {
     }
 
     // 아이템 데이터 추가를 위한 함수. 개발자가 원하는대로 작성 가능.
-    public void addItem(Drawable icon, String title, String desc) {
+    public void addItem(Drawable icon, String title, String desc, String id) {
         ListViewItem item = new ListViewItem();
 
         item.setIcon(icon);
         item.setTitle(title);
         item.setDesc(desc);
+        item.setEdu_id(id);
 
         listViewItemList.add(item);
     }
